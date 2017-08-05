@@ -1,13 +1,16 @@
 import threading
 import sys
+import json
+import requests
 from smart_vision_api import SmartVisionAPI
 from webcam import CaptureDevice
 
-URL = "http://192.198.0.2:8080"
+URL = "http://localhost:8080"
 
 
 def get_count(data):
     objects = data['task']['description']
+    print(data['task'])
     return objects.count(u"person")
 
 
@@ -17,8 +20,6 @@ def post_pedestrian_detection(count):
     params = '{"id":"%s","count":"%s","capacity":"%s"}' % (1234, count, 30)
 
     r = requests.post(url, data=params, headers=headers)
-    res = json.loads(r.text)
-    return res
 
 def capture():
     print("Capturing image...")
@@ -35,7 +36,7 @@ def capture():
 
     print("Post to backend...")
     post_pedestrian_detection(count)
-    
+
     print(count)
     capture()
 
