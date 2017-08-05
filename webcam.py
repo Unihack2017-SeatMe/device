@@ -46,15 +46,18 @@ class CaptureDevice:
             raise Exception('error capturing frame')
         
         # Resize image
-        new_size = (
-            int(round(
-                (sqrt(frame.shape[1])*sqrt(pixels)) / sqrt(frame.shape[0])
-            )),
-            int(round(
-                (sqrt(frame.shape[0])*sqrt(pixels)) / sqrt(frame.shape[1])
-            ))
-        )
-        frame = cv2.resize(frame, new_size, interpolation=cv2.INTER_LANCZOS4)
+        if frame.shape[1]*frame.shape[0] > pixels:
+            new_size = (
+                int(round(
+                    (sqrt(frame.shape[1])*sqrt(pixels)) / sqrt(frame.shape[0])
+                )),
+                int(round(
+                    (sqrt(frame.shape[0])*sqrt(pixels)) / sqrt(frame.shape[1])
+                ))
+            )
+            frame = cv2.resize(
+                frame, new_size, interpolation=cv2.INTER_LANCZOS4
+            )
         
         # Encode as JPEG with given quality
         return_value, jpeg = cv2.imencode(
