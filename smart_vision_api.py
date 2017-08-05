@@ -14,6 +14,7 @@ class SmartVisionAPI:
 
     @staticmethod
     def post_image(encoded_string):
+        print("POST image...")
         cmd_json = {'Content-Type': 'application/json', }
         cmd_params = '{"service":"%s","image":"%s"}' % (method_type, encoded_string)
         cmd_auth = ('demo1', 'hackathon7493')
@@ -21,15 +22,18 @@ class SmartVisionAPI:
 
         r = requests.post(cmd_url, auth=cmd_auth, data=cmd_params, headers=cmd_json)
         res = json.loads(r.text)
+        print("...")
         return res['task']['uri'].split('/')[-1]
 
     @staticmethod
     def put_run_image(file_id):
+        print("PUT file_id...")
         cmd_header = {'Content-Type': 'application/json', }
         cmd_data = '{"scanned":true}'
         cmd_url = 'http://smartvision.aiam-dh.com:8080/api/v1.0/tasks/run/' + file_id
 
         r = requests.put(cmd_url, headers=cmd_header, data=cmd_data, auth=('demo1', 'hackathon7493'))
+        print("done...")
         return json.loads(r.text)
 
     def process_image(self, encoded_image):
