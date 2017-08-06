@@ -5,7 +5,7 @@ import requests
 from smart_vision_api import SmartVisionAPI
 from webcam import CaptureDevice
 
-URL = "http://localhost:8080"
+URL = "http://118.139.19.176:8080"
 
 
 def get_count(data):
