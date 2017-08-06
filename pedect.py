@@ -17,7 +17,7 @@ def get_count(data):
 def post_pedestrian_detection(count):
     url = "%s/devices" % URL
     headers = {'Content-Type': 'application/json', }
-    params = '{"id":"%s","count":"%s","capacity":"%s"}' % (1234, count, 30)
+    params = '{"id":%d,"count":%d,"capacity":%d}' % (1, count, 30)
 
     r = requests.post(url, data=params, headers=headers)
 

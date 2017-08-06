@@ -9,7 +9,7 @@ def generate_dummy_data(_id, count):
     url = "%s/devices" % URL
     headers = {'Content-Type': 'application/json', }
     params = '{"id":"%s","count":"%s","capacity":"9"}' % (_id, count)
-
+    print("Posting")
     requests.post(url, data=params, headers=headers)
 
 
